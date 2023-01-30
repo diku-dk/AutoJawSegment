@@ -187,20 +187,13 @@ Excel functions to get the mean and std of the overall performance
 
 ## Final Finite Element Model
 
-Much of the motivation of this project is under a larger project: Open-Full-Jaw: An open-access dataset and pipeline for finite element models of human jaw
+Much of the motivation of this project is related to a larger project named ["Open-Full-Jaw: An open-access dataset and pipeline for finite element models of human jaw"](https://www.sciencedirect.com/science/article/pii/S0169260722003911)
 
 available at https://github.com/diku-dk/Open-Full-Jaw
 
-The auto segmentation of teeth and bones is the essential first step to generate patient-specific 
-jaw finite element model for simulation studies. 
 
-The generated surface mesh via marching cubes algorithm over the auto segmentation results is under the folder ```RawSegment```. 
+![Fig6](https://user-images.githubusercontent.com/30265621/215486601-7702284b-639e-47ff-a787-15cdc5b95e91.jpg)
 
-The cleaning and remeshing can be applied automatically following the instruction. 
-These operations are necessary to remove too dense or irregular triangles, 
-which is usually due to the artefacts from marching cubes rather than segmentation qualities. 
 
-The cleaned surface mesh from ```RawSegment``` is under ```CleanSegment``` folder in .obj format. 
-Please refer to the ```CartiGen``` and later folders for the generated cartilage and the simulation results on it.
 
-[![f](https://user-images.githubusercontent.com/30265621/172655083-a12f4842-aaa8-4a69-be95-2cfde6063008.png)](https://github.com/diku-dk/Open-Full-Jaw)
+The auto segmentation of teeth and bones is the essential first step to generate patient-specific finite element models of the human jaw. As mentioned in [Open-Full-Jaw](https://www.sciencedirect.com/science/article/pii/S0169260722003911), this step involves time-consuming and labor-intensive segmentation task of fine geometries, i.e., teeth, PDL, and bone structures. A potential use case for this study is to use the output of our model as the initial step. Then, improve the quality of the reconstructed geometries as well as the generated gap regions. Finally, generate the required PDL geometries for the simulation purposes. 
