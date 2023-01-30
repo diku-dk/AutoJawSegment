@@ -1,0 +1,233 @@
+mp train --num_GPUs=1 --overwrite --num_GPUs=0 --distance_loss \
+--initialize_from '../mm_project/model/@epoch_20_val_dice_0.95144.h5'
+
+mp train --overwrite --num_GPUs=0 --init_filters=16 --train_images_per_epoch 10 --no_val
+
+mp train --overwrite --num_GPUs=1 --force_GPU=0
+
+mp train --continue --num_GPUs=0 --train_images_per_epoch 10
+
+mp predict --num_GPUs=0 --sum_fusion --overwrite --no_eval \
+--dim_for_predict 512 \
+--by_radius --out_dir predictions_w_o_fusion --force_GPU=0
+
+mp predict --num_GPUs=1 --sum_fusion --overwrite --no_eval \
+--by_radius --out_dir predictions_w_o_fusion --force_GPU=0
+
+mp predict --num_GPUs=1 --sum_fusion --overwrite --no_eval \
+--by_radius --out_dir predictions_w_o_fusion --force_GPU=0
+
+mp init_project --name av --data_dir ./data_folder
+
+mp init_project --name av_3d --data_dir ./data_folder --model=3D
+
+sudo bash add_slurmdb.sh xkr133
+f
+pip install -e MultiPlanarUNet
+
+mp predict --num_GPUs=1 --sum_fusion --overwrite \
+  --by_radius --no_eval --out_dir predictions_0809 --force_GPU=0 --init_filters 32
+h
+
+
+mp predict --num_GPUs=1 --sum_fusion --fusion_save_to_disk \
+--overwrite --by_radius --no_eval --out_dir predictions_0914 --force_GPU=0 \
+-f Patient_26/CBCT_scan_26.nii
+
+
+
+mp predict --num_GPUs=1 --sum_fusion \
+--only_load_from_disk --fusion_save_to_disk \
+--overwrite --by_radius --no_eval --out_dir predictions_0914 --force_GPU=0 \
+-f Patient_26/CBCT_scan_26.nii
+
+mp predict --num_GPUs=1 --sum_fusion \
+--continue --by_radius --no_eval --out_dir predictions_0914_2 #--force_GPU=0 \
+
+
+mp predict --num_GPUs=1 --sum_fusion --continue --by_radius --no_eval --force_GPU=0 \
+--out_dir predictions_1014 \
+--fusion_save_to_disk --delete_fusion_after
+
+-f ../data_folder/jaw_0_15_cropped/val/images/Patient_10_0.15mm_cropped.nii.gz\
+--fusion_save_to_disk --delete_fusion_after
+
+mp predict --num_GPUs=1 --sum_fusion  --init_filters 64  \
+--overwrite --by_radius --no_eval --force_GPU=0 --out_dir predictions_no_arg \
+--fusion_save_to_disk --delete_fusion_after \
+--use_diag_dim
+
+mp predict --num_GPUs=1 --sum_fusion  --init_filters 64  \
+--overwrite --by_radius --no_eval --force_GPU=0 --out_dir predictions_no_arg \
+--use_diag_dim
+
+--dim_for_predict 576
+--use_diag_dim --predict_batch_size=4
+
+--use_diag_dim --predict_batch_size=6
+
+--no_argmax --no_softmax \
+--use_diag_dim
+--save_single_class=2
+
+mp predict --num_GPUs=1 --sum_fusion --use_diag_dim  --overwrite --by_radius --no_eval --force_GPU=0 \
+--out_dir predictions_no_arg \
+--fusion_save_to_disk --delete_fusion_after \
+--no_argmax --no_softmax --single_task=2
+
+
+mp predict --num_GPUs=1 --sum_fusion --overwrite --by_radius --no_eval --force_GPU=0 \
+--out_dir predictions_no_arg \
+--no_argmax --no_softmax
+
+mp predict --num_GPUs=1 --sum_fusion --overwrite --by_radius --no_eval --force_GPU=0 \
+--out_dir predictions_no_arg_w_softmax_teeth \
+--no_argmax --save_single_class=2
+--fusion_save_to_disk --delete_fusion_after \
+--no_argmax --save_single_class=2 --single_task=1
+
+
+mp predict --num_GPUs=1 --sum_fusion --overwrite --by_radius --force_GPU=0 \
+--out_dir predictions_ccd \
+--ccd --ccd_portion 0.3
+
+
+
+
+--only_load_from_disk
+
+--delete_fusion_after
+
+
+mp predict --num_GPUs=1 --sum_fusion --continue --by_radius --no_eval --force_GPU=0
+
+
+
+mp predict --num_GPUs=1 \
+--sum_fusion \
+--overwrite \
+--no_eval \
+--by_radius \
+--out_dir predictions_on_ours --force_GPU=0 --extra_bound 100
+
+mp predict --num_GPUs=1 \
+--sum_fusion \
+--continue \
+--no_eval \
+--by_radius \
+--out_dir predictions_on_ours --force_GPU=0 --extra_bound 100 --num_extra_planes 300
+
+
+mp predict --num_GPUs=1 \
+--sum_fusion \
+--overwrite \
+--no_eval \
+--by_radius \
+--out_dir predictions \
+--force_GPU=0
+
+mp predict --num_GPUs=1 \
+--sum_fusion --no_eval \
+--overwrite \
+--by_radius --fusion_save_to_disk \
+--out_dir predictions_double --force_GPU=0
+ \
+--num_extra_planes 500 \
+
+--save_per_view
+--save_slices \
+--extra_bound 50 \
+
+-f ../data_folder/jaw_0_15_cropped/train/images/Patient_8_0.15mm_cropped.nii.gz
+
+
+mp predict --num_GPUs=1 --sum_fusion --no_eval --force_GPU=0 --overwrite \
+--by_radius \
+--predict_batch_size 6
+
+--fusion_save_to_disk \
+--out_dir predictions_11 --force_GPU=0 \
+--predict_batch_size 6
+
+
+--save_slices \
+
+-f ../data_folder/jaw_0_15_cropped/train/images/Patient_8_0.15mm_cropped.nii.gz
+
+
+
+../data_folder/jaw_0_15_cropped/train/images/Patient_8_0.15mm_cropped.nii.gz
+
+
+mp train --num_GPUs=1 --overwrite --distance_loss --transfer_last_layer --force_GPU=0 \
+--distance_map_folder weight_map_morph \
+--initialize_from '../jaw_small_voxel_size_crop_thresh/model/@epoch_36_val_dice_0.94203.h5'
+
+mp train --num_GPUs=1 --overwrite --force_GPU=0 --init_filters 64 \
+--initialize_from '../jaw_small_voxel_size_crop_double_norm/model/@epoch_37_val_dice_0.92465.h5'
+
+
+mp train --num_GPUs=1 --overwrite --distance_loss --force_GPU=0 --transfer_last_layer  \
+--distance_map_folder weight_map_morph \
+--initialize_from '../my_hip_project0823_w_val/model/@epoch_29_val_dice_0.96632.h5'
+
+mp train --num_GPUs=1 --overwrite --force_GPU=0 --set_memory_growth --no_val
+
+mp train --num_GPUs=1 --overwrite --force_GPU=0 --build_res --init_filters 32
+
+mp train --num_GPUs=1 --overwrite --force_GPU=0 --init_filters 64
+
+
+mp train --num_GPUs=1 --continue --distance_loss --force_GPU=0 --distance_map_folder weight_map_minus
+
+mp train --num_GPUs=1 --overwrite --distance_loss --transfer_last_layer --force_GPU=0 \
+--distance_map_folder weight_map_minus \
+--initialize_from '../my_hip_project0823_w_val/model/@epoch_19_val_dice_0.93517.h5'
+
+mp train --num_GPUs=1 --overwrite --distance_loss --transfer_last_layer --force_GPU=0 \
+--distance_map_folder weight_map_morph \
+--initialize_from '../my_hip_project0823_w_val_thresh/model/@epoch_67_val_dice_0.96978.h5'
+
+../my_hip_project0823_w_val_thresh/model/@epoch_67_val_dice_0.96978.h5
+
+
+
+mp train --num_GPUs=1 --overwrite --distance_loss --transfer_last_layer --force_GPU=0 \
+--distance_map_folder weight_map_morph_1 \
+--initialize_from '../jaw_small_voxel_size/model/@epoch_32_val_dice_0.92290.h5'
+
+
+!mp train --num_GPUs=1 --overwrite --distance_loss --transfer_last_layer --force_GPU=0 \
+--distance_map_folder weight_map_morph \
+--initialize_from '../my_hip_project0823_w_val/model/@epoch_19_val_dice_0.93517.h5'
+
+
+mp train --num_GPUs=1 --overwrite --force_GPU=0 \
+--initialize_from '../jaw_small_voxel_size_crop_thresh_gap/model/@epoch_53_val_dice_0.98284.h5'
+
+mp train --num_GPUs=1 --continue --force_GPU=1 --force_GPU=0
+
+mp train --num_GPUs=1 --overwrite --distance_loss --transfer_last_layer --force_GPU=0 \
+--distance_map_folder weight_map_morph_1 \
+--initialize_from '../jaw_small_voxel_size_crop_double_stand/model/@epoch_56_val_dice_0.93252.h5'
+
+# use smaller lr????????
+
+mp train_fusion --overwrite --num_GPUs=1 --force_GPU=0 --batch_size 13107 \
+--images_per_round 1 --min_val_images 4
+
+mp train_fusion --continue_training --num_GPUs=1 --force_GPU=0 --images_per_round 1 --min_val_images 2 --batch_size 1000
+
+
+mp predict_3D --num_GPUs=1 --overwrite --no_eval --force_GPU=0 --#extra 100
+
+#--append_existing #--no_val
+
+--batch_size 131072
+
+--images_per_round 2 --min_val_images 4
+
+2**17 =
+
+
+@epoch_28_val_dice_0.96274.h5
