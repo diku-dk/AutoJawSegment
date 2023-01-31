@@ -45,7 +45,7 @@ Make sure you change ```xxx``` according to the .h5 file of the model generated 
 
 ### Fine-tuning with weight_map loss
 
-![](training_pipeline.jpg)
+![](figs/training_pipeline.jpg)
 
 
 
@@ -85,7 +85,7 @@ Then, run the same command to compute the weigh map.
 python mpunet/preprocessing/weight_map.py
 ```
 
-![](double_weight.jpg)
+![](figs/double_weight.jpg)
 
 ### Interative Fine-tuning
 To do Interative fine-tuning with the weight_map loss, make sure you first put the new training dataset to the data_dir,
@@ -135,7 +135,7 @@ images along with dice coefficient performance metrics.
 
 ## Individual Tooth Segmention with Post-Processing
 
-![](watershed.jpg)
+![](figs/watershed.jpg)
 
 The proposed watershed instance segmentation pipeline works on the UNet output probability map (for the teeth class). 
 In order to get the fused (averaged) probability map (the softmax score) before argmax of MPUNet, 
