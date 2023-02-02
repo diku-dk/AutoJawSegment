@@ -188,7 +188,14 @@ python mpunet/evaluate/compute_metrics.py
 This will print the mean and standard deviation for the 4 metrics, as well as generate .csv files for the score for each image. 
 You can use simple a script or Excel functions to get the mean and std of the overall performance
 
+### Sample Result
 
+```results``` folder includes some prediction results of our pipeline, with the following structure:
+
+* ```UNet```: The direct output from MPUNet (with argmax). Bone class will be labeled ```1``` and Teeth will be labeled ```2```
+* ```Watershed```: The instance segmentation of each individual tooth from proposed method, where each tooth will be labeled from ```1``` to ```num_teeth``` of each scan
+* ```Combined```: The Watershed result combined with the UNet Bone class result, where bone class will be labeled 1 and each tooth will be labeled from ```2``` to ```num_teeth + 1``` of each san
+* ```Combined_binary```: The result from combined where each individual tooth is mapped back to label ```2```.
 
 ## Final Finite Element Model
 
