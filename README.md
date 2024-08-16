@@ -9,6 +9,18 @@ But make sure you clone from the current repository.
 
 #  Teeth-bone Specific Pipeline with Transfer learning and Instance segmentation post-processing
 
+##  Installation
+```
+git clone https://github.com/diku-dk/AutoJawSegment
+conda create -n MPUNet python==3.9
+conda activate MPUNet
+conda install -c conda-forge cudatoolkit=11.2 cudnn=8.1.0
+pip install -e AutoJawSegment
+```
+####  test if gpu activated
+ ```
+ python -c "import tensorflow as tf; print(tf.config.list_physical_devices('GPU'))"
+```
 
 ## Initializing two projects, one for pretraining on inaccurate data, and one for fine-tuning as follows:
 
@@ -30,7 +42,7 @@ The model can now be pre-trained as follows:
 
 ```
 cd my_pretraining_project
-mp train --num_GPUs=1   # Any number of GPUs (or 0)
+mp train --overwrite --num_GPUs=1   # Any number of GPUs (or 0)  --force_GPU=0 # set this if gpu is doing other works from deep learning
 ```
 
 ## Fine-tuning
