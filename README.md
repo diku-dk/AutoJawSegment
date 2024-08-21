@@ -22,9 +22,9 @@ pip install -e AutoJawSegment
 ## Initializing two projects, one for pretraining on inaccurate data, and one for fine-tuning as follows:
 
 ```
-# Initialize a project for pretraining
+# Initialize a project for pretraining/or just training without a pretrained model
 mp init_project --name my_pretraining_project --data_dir ./pretraining_data_folder
-# Initialize a project for pretraining
+# Initialize a project for finetuing
 mp init_project --name my_finetune_project --data_dir ./fineune_data_folder
 ```
 
@@ -59,13 +59,7 @@ The trained model can now be evaluated on the testing data in
 ```data_folder/test``` by invoking:
 
 ```
-mp predict --num_GPUs=1 \
---force_GPU=0 \
---sum_fusion \
---overwrite \
---no_eval \
---by_radius \
---out_dir predictions 
+mp predict --num_GPUs=1 --force_GPU=0 --sum_fusion --overwrite --no_eval --by_radius --out_dir predictions 
 ```
 note that the ```--sum_fusion``` tag is essential since we are not training 
 another fusion model. ```--by_radius``` tage is also essential in ensuring different sampling strategy during training
